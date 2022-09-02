@@ -33,13 +33,23 @@
         <textarea class="form-control" name="content" rows="3"></textarea>
         <button class="btn btn-primary mt-3" type="submit">Post</button>
       </form>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          {% if message %}
+          <p class="text-danger mt-2">{{message}}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
       <br>
       <hr class="border border-dark border-2">
       <br>
       <!-- All Posts -->
       <div class="w-50">
+       
+        {% for post in posts %}
         <form action="/post/delete" method="post">
-          {% for post in posts %}
           <div class="d-flex justify-content-between">
             <div>
               <p class="mb-2 fw-bold text-decoration-underline">{{ post.creater.first_name }} {{ post.creater.last_name }}</p>
@@ -50,8 +60,9 @@
             <button class="btn btn-danger align-self-center" type="submit">Delete</button>
             {% endif %}
           </div>
-            {% endfor %}
         </form>
+        {% endfor %}
+
       </div>
     </div>
 </body>

@@ -13,6 +13,8 @@ def create_post():
         "user_id": session['user_id']
     }
     print("About to save data!")
+    if not post.Post.validate_post(data):
+        return redirect('/dojo_wall')
     post.Post.save(data)
     return redirect('/dojo_wall')
 
@@ -23,3 +25,4 @@ def delete_post():
     }
     post.Post.delete(data)
     return redirect('/dojo_wall')
+

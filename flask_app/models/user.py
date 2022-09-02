@@ -79,3 +79,4 @@ class User:
         if len(passwords['password']) == ' ':
             is_valid = False
         return is_valid
+

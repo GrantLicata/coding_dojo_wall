@@ -53,3 +53,11 @@ class Post:
     def delete(cls, data):
         query = "DELETE FROM posts WHERE id = %(id)s;"
         return connectToMySQL('twitter').query_db( query, data )
+
+    @staticmethod
+    def validate_post(data):
+        is_valid = True
+        if len(data['content']) < 1:
+            flash("Please include message to post.")
+            is_valid = False
+        return is_valid
